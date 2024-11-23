@@ -11,37 +11,8 @@ import pandas as pd
 from plotly.subplots import make_subplots
 import argparse
 
-try:
-    from IPython import get_ipython
 
-    ip = get_ipython()
-    if ip is not None:
-        # For displaying latex in vs code notebooks
-        from IPython.display import display, HTML
-
-        plotly.offline.init_notebook_mode()
-        display(
-            HTML(
-                '<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"></script>'
-            )
-        )
-    print("Executou tudo")
-except:
-    # Not executing as notebook
-    pass
-
-sys.exit()
 # %%
-
-
-class Args(argparse.Namespace):
-    data = "./data/penn"
-    model = "LSTM"
-    emsize = 200
-    nhid = 200
-
-
-args = Args()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("name", type=str, help="Name of decoder")
@@ -97,29 +68,29 @@ y = np.array(samples_y)
 # %% Distribution
 # Create grid of images with plotly, in which each image is a histogram of
 # the latent distribution (px.histogram)
-n_cols = 2
-fig = make_subplots(
-    rows=5,
-    cols=2,
-    subplot_titles=[f"Cont. Latent $z_{i}$" for i in range(HP["cont_dim"])],
-)
-data = pd.DataFrame(z[:, :])
-data["label"] = y
-data
-for i in range(HP["cont_dim"]):
-    histograms = px.histogram(data, x=i, color="label")
-    for histogram in histograms.data:
-        histogram["showlegend"] = False
-        # Add histograms to subplot
-        fig.add_trace(histogram, row=(i // n_cols) + 1, col=(i % n_cols) + 1)
-        fig.update_yaxes(range=[0, 70], row=(i // n_cols) + 1, col=(i % n_cols) + 1)
-        fig.update_xaxes(range=[-4, 4], row=(i // n_cols) + 1, col=(i % n_cols) + 1)
-fig.update_layout(
-    height=1200,
-    margin=dict(l=0, r=0, b=0),
-    barmode="stack",
-)
-fig.show()
+# n_cols = 2
+# fig = make_subplots(
+#     rows=5,
+#     cols=2,
+#     subplot_titles=[f"Cont. Latent $z_{i}$" for i in range(HP["cont_dim"])],
+# )
+# data = pd.DataFrame(z[:, :])
+# data["label"] = y
+# data
+# for i in range(HP["cont_dim"]):
+#     histograms = px.histogram(data, x=i, color="label")
+#     for histogram in histograms.data:
+#         histogram["showlegend"] = False
+#         # Add histograms to subplot
+#         fig.add_trace(histogram, row=(i // n_cols) + 1, col=(i % n_cols) + 1)
+#         fig.update_yaxes(range=[0, 70], row=(i // n_cols) + 1, col=(i % n_cols) + 1)
+#         fig.update_xaxes(range=[-4, 4], row=(i // n_cols) + 1, col=(i % n_cols) + 1)
+# fig.update_layout(
+#     height=1200,
+#     margin=dict(l=0, r=0, b=0),
+#     barmode="stack",
+# )
+# fig.show()
 
 
 # %% # Check reconstructions
@@ -250,10 +221,3 @@ layout = dict(
 
 fig = go.Figure(data=frames[0]["data"], layout=layout, frames=frames)
 fig.show(config={"displayModeBar": False})
-# Set renderer as browser
-# import plotly.io as pio
-
-# pio.renderers.default = "browser"
-# pio.renderers
-
-# %%

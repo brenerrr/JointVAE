@@ -8,6 +8,13 @@ from tensorboardcallback import TensorBoardCallback
 from jointvae import JointVAE
 from utils import get_dataset
 import shutil
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--wandb-log", action="store_true", help="Should log results on weights and biases"
+)
+args = parser.parse_args()
 
 tf.random.set_seed(10)
 
@@ -24,8 +31,7 @@ with open(hp_file, "r") as f:
     HP = json.load(f)
 
 # %% Setup logging
-wandb_log = False
-wandb_log = input("Should log on wandb? Y-Yes or N-no\n").lower() == "y"
+wandb_log = args.wandb_log
 if wandb_log:
     import wandb
 
@@ -45,14 +51,17 @@ tensorboard_cb = TensorBoardCallback(
 
 # %% Setup model
 model = JointVAE(HP["cont_dim"], HP["disc_dim"], HP["c_cont"], HP["c_disc"])
-model.compile(optimizer=keras.optimizers.Adam(learning_rate=HP["lr"]), run_eagerly=True)
+model.compile(
+    optimizer=keras.optimizers.Adam(learning_rate=HP["lr"]),
+    run_eagerly=False,
+)
 # %%
 model.encoder.summary()
 # %%
 model.decoder.summary()
 
 # %% Train
-model.fit(train_dataset, epochs=HP["epochs"], callbacks=[tensorboard_cb])
+hist = model.fit(train_dataset, epochs=HP["epochs"], callbacks=[tensorboard_cb])
 if wandb_log:
     wandb.finish()
 
@@ -84,10 +93,4 @@ hp_file = os.path.join(os.path.dirname(__file__), f"{name}.json")
 with open(hp_file, "w") as f:
     json.dump(HP, f)
 
-# %%
-
-# filepath = os.path.join(os.path.dirname(__file__), f"encoder_model.tflite")
-# encoder = tf.lite.Interpreter(filepath)
-
-# signature = encoder.get_signature_runner()
-# signature.get_input_details()["input"]["index"]
+print("Training finished")

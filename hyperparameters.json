@@ -1,7 +1,7 @@
 {
     "lr": 5e-4,
     "batch_size": 64,
-    "epochs": 1,
+    "epochs": 100,
     "cont_dim": 10,
     "disc_dim": [
         10

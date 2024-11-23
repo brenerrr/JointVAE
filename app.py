@@ -8,10 +8,10 @@ import argparse
 import json
 
 parser = argparse.ArgumentParser()
-parser.add_argument("name", type=str, help="Name of decoder")
-parser.add_argument("-i", type=int, nargs="+", help="Order of continuous latent dims")
+parser.add_argument("-model", type=str, help="Name of decoder", required=True)
+parser.add_argument("-i", type=int, nargs="+", required=True, help="Order of continuous latent dims")
 args = parser.parse_args()
-name = args.name
+name = args.model
 i_cont = args.i
 
 # Load hyperparameters
