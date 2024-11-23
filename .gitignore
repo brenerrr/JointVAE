@@ -1,0 +1,6 @@
+.vscode
+logs
+models
+wandb
+*.log
+__pycache__

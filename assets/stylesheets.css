@@ -1,0 +1,114 @@
+/* latin */
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url(https://fonts.gstatic.com/s/notosans/v27/o-0IIpQlx3QUlC5A4PNr5TRA.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+body {
+    font-family: 'Noto Sans';
+    color: #F0A500;
+    background-color: #1b1513;
+
+
+}
+
+#frame {
+    display: flex;
+    width: 700px;
+    /* height: 400px; */
+    border-style: solid;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+#controls {
+    flex: 0.8;
+    display: table;
+    margin-right: 1%;
+}
+
+/* Figure */
+#figure {
+    flex: 1
+}
+
+#graph {
+    height: 100%;
+}
+
+/* Radios */
+#radios {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#radios>* {
+    padding-left: 40px;
+}
+
+#radios>div:first-child {
+    padding-left: 40px;
+}
+
+#div_radios {
+    border-color: #f0a40051;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 7px;
+    margin-top: 5%;
+    padding: 2%;
+
+}
+
+.form-check-input:checked {
+    background-color: #F0A500;
+    border-color: #F0A500;
+}
+
+/* Sliders */
+#div_sliders {
+    flex-direction: column;
+    border-color: #f0a40051;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 7px;
+    padding: 2%;
+}
+
+.rc-slider-track {
+    background-color: #F0A500;
+}
+
+.rc-slider-handle {
+    border-color: #F0A500;
+    background-color: #1b1513;
+}
+
+.rc-slider-dot {
+    visibility: hidden;
+}
+
+/* Button */
+#div_button {
+    margin-top: 5%;
+}
+
+.btn {
+    background-color: #F0A500;
+    border-color: #F0A500;
+    --bs-btn-hover-bg: #F0A500;
+    --bs-btn-hover-border-color: #F0A500;
+    --bs-btn-active-bg: #E45826;
+    --bs-btn-active-border-color: #E45826;
+
+}
+
+:root {
+    --bs-body-bg: #1b1513;
+    --bs-border-width: 2px;
+}
