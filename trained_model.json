@@ -1,0 +1,1 @@
+{"lr": 0.0005, "batch_size": 64, "epochs": 100, "cont_dim": 10, "disc_dim": [10], "n_examples": 10, "c_cont": {"max": 5, "min": 0, "steps": 25000, "gamma": 30}, "c_disc": {"max": 5, "min": 0, "steps": 25000, "gamma": 30}}
