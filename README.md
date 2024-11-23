@@ -1,5 +1,7 @@
 # Joint VAE with Keras
 
+![output](https://github.com/user-attachments/assets/fa3279ec-059a-4cb9-b1e7-7fd8f661cd30)
+
 This repository implements the algorithm from the paper [Learning Disentangled Joint Continuous and Discrete Representations](https://arxiv.org/abs/1804.00104). As stated in the abstract, the main objective is to "learn a disentangled and interpretable jointly continuous and discrete representations in an unsupervised manner".
 
 Putting in simpler words, we want to force each dimension of the latent space of a VAE to change something different from the other ones. If we consider images of digits, then hopefully changing one dimension would alter the thickness of the strokes, while another would change the angle of the digit.
